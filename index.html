@@ -43,8 +43,10 @@
       gap: 12px;
     }
     .nav-logo img {
-      height: 32px;
+      height: 28px;
       width: auto;
+      border-radius: 4px;
+      filter: brightness(0) invert(1);
     }
     .nav-links {
       display: flex;
@@ -432,8 +434,7 @@
 <!-- Nav -->
 <nav>
   <a href="#" class="nav-logo">
-    <img src="images/eyelabs logo 5.28.svg" alt="EyeLabs AI Logo">
-    EyeLabs AI
+    <img src="images/eyelabs logo 5.28.svg" alt="EyeLabs AI">
   </a>
   <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">
     <span></span><span></span><span></span>
