@@ -1,234 +1,577 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> 
-<html class="no-js"> <!--<![endif]-->
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="description" content="EyeLabs AI - Revolutionizing Eye Care Through Technology">
-  
-  <meta name="author" content="EyeLabs AI">
-
-  <title>EyeLabs AI</title>
-
-  <!-- Mobile Specific Meta-->
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Favicon -->
+  <meta name="description" content="EyeLabs AI - AI-powered ophthalmology tools for diagnostics, clinical decision support, and research.">
+  <title>EyeLabs AI</title>
   <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png" />
-  <!-- bootstrap.min css -->
-  <link rel="stylesheet" href="plugins/bootstrap/bootstrap.min.css">
-  <!-- Ionic Icon Css -->
-  <link rel="stylesheet" href="plugins/Ionicons/css/ionicons.min.css">
-  <!-- animate.css -->
-  <link rel="stylesheet" href="plugins/animate-css/animate.css">
-  <!-- Magnify Popup -->
-  <link rel="stylesheet" href="plugins/magnific-popup/magnific-popup.css">
-  <!-- Owl Carousel CSS -->
-  <link rel="stylesheet" href="plugins/slick/slick.css">
-  
-  <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0a0a0a;
+      color: #e8e8e8;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* --- NAV --- */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px;
+      background: rgba(10,10,10,0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .nav-logo img {
+      height: 32px;
+      width: auto;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 400;
+      color: #b0b0b0;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta {
+      font-size: 14px;
+      font-weight: 500;
+      color: #fff !important;
+      border-bottom: 2px solid #fff;
+      padding-bottom: 4px;
+    }
+
+    /* Mobile nav toggle */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #fff;
+      transition: 0.3s;
+    }
+
+    /* --- HERO --- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 140px 48px 80px;
+      background: linear-gradient(135deg, #0a0a0a 0%, #0f1419 50%, #0a0a0a 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 800px; height: 800px;
+      background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(42px, 6vw, 80px);
+      font-weight: 500;
+      line-height: 1.1;
+      color: #fff;
+      max-width: 900px;
+      margin-bottom: 28px;
+    }
+    .hero p {
+      font-size: clamp(16px, 2vw, 20px);
+      color: #999;
+      max-width: 680px;
+      line-height: 1.7;
+    }
+
+    /* --- FEATURES GRID --- */
+    .features {
+      padding: 100px 48px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .feature-card {
+      text-align: center;
+      padding: 40px 20px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .feature-card:hover {
+      border-color: rgba(255,255,255,0.2);
+      transform: translateY(-4px);
+    }
+    .feature-icon {
+      font-size: 36px;
+      margin-bottom: 20px;
+      display: block;
+    }
+    .feature-card h3 {
+      font-size: 15px;
+      font-weight: 500;
+      color: #ddd;
+    }
+
+    /* --- SECTION TITLES --- */
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 500;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .section-subtitle {
+      font-size: 16px;
+      color: #888;
+      text-align: center;
+      margin-bottom: 64px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* --- AUDIENCE CARDS --- */
+    .audiences {
+      padding: 100px 48px;
+      background: #0d0d0d;
+    }
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .audience-card {
+      padding: 40px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      transition: border-color 0.3s;
+    }
+    .audience-card:hover { border-color: rgba(255,255,255,0.2); }
+    .audience-card h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .audience-card p {
+      font-size: 15px;
+      color: #999;
+      line-height: 1.7;
+    }
+
+    /* --- DATA / TRUST SECTION --- */
+    .trust {
+      padding: 100px 48px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .trust-content {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .trust-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 3.5vw, 42px);
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: 24px;
+    }
+    .trust-text p {
+      font-size: 16px;
+      color: #999;
+      line-height: 1.8;
+    }
+    .trust-image {
+      display: flex;
+      justify-content: center;
+    }
+    .trust-image img {
+      max-width: 100%;
+      border-radius: 8px;
+      opacity: 0.85;
+    }
+
+    /* --- PROCESS --- */
+    .process {
+      padding: 100px 48px;
+      background: #0d0d0d;
+    }
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .process-step { }
+    .process-step h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .process-step p {
+      font-size: 14px;
+      color: #999;
+      line-height: 1.7;
+    }
+    .step-number {
+      display: inline-block;
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      color: rgba(255,255,255,0.15);
+      margin-bottom: 16px;
+    }
+
+    /* --- CTA --- */
+    .cta {
+      padding: 120px 48px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .cta h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 5vw, 64px);
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: 40px;
+    }
+    .cta-btn {
+      display: inline-block;
+      font-size: 16px;
+      font-weight: 500;
+      color: #fff;
+      border-bottom: 2px solid #fff;
+      padding-bottom: 6px;
+      transition: opacity 0.2s;
+    }
+    .cta-btn:hover { opacity: 0.7; }
+
+    /* --- CONTACT --- */
+    .contact {
+      padding: 100px 48px;
+      background: #0d0d0d;
+    }
+    .contact-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .contact-inner h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .contact-inner .contact-desc {
+      color: #888;
+      font-size: 16px;
+      margin-bottom: 40px;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 6px;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      margin-bottom: 16px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: rgba(255,255,255,0.35);
+    }
+    .contact-form textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    .contact-form button {
+      background: #fff;
+      color: #0a0a0a;
+      border: none;
+      padding: 14px 40px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .contact-form button:hover { opacity: 0.85; }
+    .contact-info {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .contact-info a {
+      color: #999;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+    .contact-info a:hover { color: #fff; }
+    .contact-info .social-links {
+      display: flex;
+      gap: 24px;
+      margin-top: 12px;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      padding: 48px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 32px;
+    }
+    .footer-left p {
+      font-size: 13px;
+      color: #555;
+    }
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .footer-links a {
+      font-size: 13px;
+      color: #888;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: #fff; }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0; right: 0;
+        background: rgba(10,10,10,0.97);
+        padding: 24px;
+        gap: 20px;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+      .nav-toggle { display: flex; }
+      .hero { padding: 120px 24px 60px; }
+      .features { padding: 60px 24px; }
+      .features-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .audiences { padding: 60px 24px; }
+      .audience-grid { grid-template-columns: 1fr; }
+      .trust { padding: 60px 24px; }
+      .trust-content { grid-template-columns: 1fr; gap: 32px; }
+      .process { padding: 60px 24px; }
+      .process-grid { grid-template-columns: 1fr; gap: 32px; }
+      .cta { padding: 80px 24px; }
+      .contact { padding: 60px 24px; }
+      footer { padding: 32px 24px; flex-direction: column; }
+    }
+    @media (max-width: 550px) {
+      .features-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
+<body>
 
-<body id="body">
+<!-- Nav -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="images/eyelabs logo 5.28.svg" alt="EyeLabs AI Logo">
+    EyeLabs AI
+  </a>
+  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact" class="nav-cta">Get Started</a></li>
+  </ul>
+</nav>
 
-<!-- Header Start -->
-<header class="navigation">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<!-- header Nav Start -->
-				<nav class="navbar">
-					<div class="container-fluid">
-						<!-- Brand and toggle get grouped for better mobile display -->
-						<div class="navbar-header">
-							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							</button>
-							<a class="navbar-brand" href="index.html">
-								<img src="images/eyelabs logo 5.28.svg" alt="Logo">
-							</a>
-						</div>
-					<!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="index.html">Home</a></li>
-              
-              <li><a href="projects.html">Tech</a></li>
-              <li><a href="publications.html">Publications</a></li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog <span class="ion-ios-arrow-down"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="Blog.html">Blog</a></li>
-                                    </ul>
-                                </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About Us <span class="ion-ios-arrow-down"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="about.html">Our Team</a></li>
-                </ul>
-              </li>
-              <li><a href="contact.html">Contact</a></li>
-            </ul>
-            </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
-						</nav>
-					</div>
-				</div>
-			</div>
-			</header><!-- header close -->
-
-<!-- Slider Start -->
-<section class="slider">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="block">
-					<h1 class="animated fadeInUp">EyeLabs.AI</h1>
-					<h2 class="animated fadeInUp">Revolutionizing Eye Care Through Technology</h2>
-					<p class="animated fadeInUp">Advancing ophthalmology with cutting-edge AI solutions for better patient outcomes</p>
-					<a href="projects.html" class="btn btn-main animated fadeInUp">Explore Our Technology</a>
-				</div>
-			</div>
-		</div>
-	</div>
+<!-- Hero -->
+<section class="hero" id="about">
+  <h1>AI-powered tools for modern ophthalmology</h1>
+  <p>From diagnostics to clinical decision support, we build intelligent software that helps eye care professionals deliver faster, more accurate care.</p>
 </section>
 
-<!-- About Section Start -->
-<section class="about section">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6">
-				<div class="block">
-					<div class="section-title">
-						<h2>Our Mission</h2>
-						<p>Transforming the future of ophthalmology through innovative technology</p>
-					</div>
-					<p>Technological applications are a key driver in adapting to the rapidly changing landscape in ophthalmology. We hope to improve access and diagnostic approaches for better treatment of eye diseases through advanced AI solutions and data-driven insights.</p>
-					<p>Our team combines deep medical expertise with cutting-edge technology to create solutions that enhance patient care and expand access to quality eye care services worldwide.</p>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="block">
-					<img src="images/lightbulb.png" alt="Innovation" class="img-responsive">
-				</div>
-			</div>
-		</div>
-	</div>
+<!-- Features -->
+<section class="features">
+  <div class="features-grid">
+    <div class="feature-card">
+      <span class="feature-icon">&#x1F441;</span>
+      <h3>AI-Driven Diagnostics</h3>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">&#x1F9E0;</span>
+      <h3>Clinical Decision Support</h3>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">&#x1F4CA;</span>
+      <h3>Ophthalmic Data Intelligence</h3>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">&#x2699;</span>
+      <h3>Practice Workflow Automation</h3>
+    </div>
+  </div>
 </section>
 
-<!-- Call to Action Section -->
-<section class="feature bg-2">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2 text-center">
-        <h2 class="section-subtitle">WE BELIEVE IN GREAT IDEAS</h2>
-        <h3>Advancing Eye Care Through Innovation</h3>
-        <p>Join us in revolutionizing the field of ophthalmology with state-of-the-art technology and research-driven solutions.</p>
-        <a href="projects.html" class="btn btn-view-works">Learn More</a>
+<!-- Audience Cards -->
+<section class="audiences">
+  <h2 class="section-title">Who we serve</h2>
+  <p class="section-subtitle">Purpose-built AI for every corner of eye care.</p>
+  <div class="audience-grid">
+    <div class="audience-card">
+      <h3>Ophthalmologists</h3>
+      <p>Augment your clinical judgment with AI-assisted diagnostics for glaucoma detection, graft assessment, ptosis classification, and more.</p>
+    </div>
+    <div class="audience-card">
+      <h3>Eye Care Clinics</h3>
+      <p>Streamline patient intake, automate outcome tracking, and reduce administrative burden so your team can focus on patient care.</p>
+    </div>
+    <div class="audience-card">
+      <h3>Academic Researchers</h3>
+      <p>Access curated ophthalmic datasets, deploy deep learning models, and accelerate your research from hypothesis to publication.</p>
+    </div>
+    <div class="audience-card">
+      <h3>Health Systems &amp; Networks</h3>
+      <p>Scale diagnostic capabilities across locations with AI tools designed for integration into existing clinical workflows and EHR systems.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Trust / Data Section -->
+<section class="trust">
+  <div class="trust-content">
+    <div class="trust-text">
+      <h2>Built by ophthalmologists, for ophthalmologists</h2>
+      <p>Our team combines clinical expertise with cutting-edge machine learning. Every tool we build is grounded in real-world ophthalmic practice and validated by leading specialists from institutions across the country.</p>
+      <p style="margin-top: 16px;">From early glaucoma detection using vision transformers to automated surgical outcome tracking, we turn complex clinical data into actionable insights.</p>
+    </div>
+    <div class="trust-image">
+      <img src="images/company/glaucomatransformer.jpeg" alt="AI-powered glaucoma analysis">
+    </div>
+  </div>
+</section>
+
+<!-- Process -->
+<section class="process">
+  <h2 class="section-title">Our process</h2>
+  <p class="section-subtitle">One platform &mdash; diagnose, analyze, optimize</p>
+  <div class="process-grid">
+    <div class="process-step">
+      <span class="step-number">01</span>
+      <h3>Understanding your needs</h3>
+      <p>We start by mapping your clinical workflow and identifying where AI can have the greatest impact on patient outcomes and practice efficiency.</p>
+    </div>
+    <div class="process-step">
+      <span class="step-number">02</span>
+      <h3>Tailored implementation</h3>
+      <p>Our team configures and deploys solutions matched to your specific subspecialty focus, patient volume, and technical infrastructure.</p>
+    </div>
+    <div class="process-step">
+      <span class="step-number">03</span>
+      <h3>Continuous improvement</h3>
+      <p>We monitor performance, incorporate your feedback, and refine our models to ensure they keep pace with evolving clinical standards.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h2>Get started with EyeLabs AI, today.</h2>
+  <a href="#contact" class="cta-btn">Book a consultation</a>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <h2>Get in touch</h2>
+    <p class="contact-desc">Have a question or want to explore how AI can work for your practice? Drop us a note.</p>
+    <form class="contact-form" action="https://formspree.io/f/xrgwqkjn" method="POST">
+      <input type="text" name="name" placeholder="Name" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="text" name="organization" placeholder="Organization (optional)">
+      <textarea name="message" placeholder="Tell us about your needs..." required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    <div class="contact-info">
+      <a href="mailto:gurpalv@eyelabs.ai">gurpalv@eyelabs.ai</a>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/gurpalvirdi/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://twitter.com/EyeLabs_AI" target="_blank" rel="noopener">X / Twitter</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Services Section Start -->
-<section class="service">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="section-title text-center">
-          <h2>Our Core Services</h2>
-          <p>Comprehensive solutions for modern ophthalmology</p>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-6 col-md-3">
-        <div class="service-item">
-          <i class="icon ion-coffee"></i>
-          <h4>Data Generation</h4>
-          <p>Advanced algorithms for synthetic data creation and augmentation</p>
-        </div>
-      </div>
-      <div class="col-sm-6 col-md-3">
-        <div class="service-item">
-          <i class="ion-compass"></i>
-          <h4>Data Labeling</h4>
-          <p>Precise annotation and classification of medical imaging data</p>
-        </div>
-      </div>
-      <div class="col-sm-6 col-md-3">
-        <div class="service-item">
-          <i class="ion-image"></i>
-          <h4>Data Enhancement</h4>
-          <p>Image processing and quality improvement for diagnostic accuracy</p>
-        </div>
-      </div>
-      <div class="col-sm-6 col-md-3">
-        <div class="service-item">
-          <i class="ion-bug"></i>
-          <h4>Distribution</h4>
-          <p>Secure and efficient data sharing platforms for research collaboration</p>
-        </div>
-      </div>
-    </div>
+<!-- Footer -->
+<footer>
+  <div class="footer-left">
+    <p>EyeLabs AI &copy; 2026. All rights reserved.</p>
   </div>
-</section>
-
-<!-- footer Start -->
-<footer class="footer">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="footer-manu">
-				</div>
-				<p class="copyright">Copyright 2021 &copy; Design & Developed by <a href="https://eyelabs.ai/">EyeLabs.AI</a>. All rights reserved.
-          <br><h4>Quick Links</h4>
-          <a href="https://eyelabs.ai/index.html">Home</a> 
-          <br><a href="https://eyelabs.ai/projects.html">Tech</a> 
-          <br> <a href="https://eyelabs.ai/Blog.html">Blog</a>
-          <br> <a href="https://eyelabs.ai/publications.html">Publications</a>
-          <br> <a href="https://eyelabs.ai/about.html">About Us</a>
-          <br> <a href="https://eyelabs.ai/contact.html">Contact</a>
-
-				</p>
-			</div>
-		</div>
-	</div>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
 </footer>
 
-    <!-- 
-    Essential Scripts
-    =====================================-->
-
-
-    <!-- Main jQuery -->
-    <script src="plugins/jQuery/jquery.min.js"></script>
-    <!-- Bootstrap 3.1 -->
-    <script src="plugins/bootstrap/bootstrap.min.js"></script>
-    <!-- slick Carousel -->
-    <script src="plugins/slick/slick.min.js"></script>
-    <script src="plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
-    <!-- filter -->
-    <script src="plugins/shuffle/shuffle.min.js"></script>
-    <script src="plugins/SyoTimer/jquery.syotimer.min.js"></script>
-
-    <!-- Form Validator -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.32/jquery.form.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
-
-    <!-- Google Map -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU&libraries=places"></script>
-    <script src="plugins/google-map/map.js"></script>
-
-    <script src="js/script.js"></script>
-
-    </body>
-
-    </html>
-   
+</body>
+</html>
